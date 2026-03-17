@@ -1,0 +1,16 @@
+{
+  "name": "kousthubha-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^16.1.7",
+    "react": "^18",
+    "react-dom": "^18"
+  }
+}

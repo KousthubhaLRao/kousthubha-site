@@ -1,0 +1,217 @@
+:root {
+  --black:       #080808;
+  --deep:        #0f0f0f;
+  --orange:      #e85d04;
+  --orange-glow: #ff6b1a;
+  --orange-dim:  #7c2d04;
+  --white:       #f0ece4;
+  --muted:       #4a4a4a;
+
+  --font-bebas:     var(--font-bebas);
+  --font-cormorant: var(--font-cormorant);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--black);
+  color: var(--white);
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-cormorant), serif;
+}
+
+/* ─── Noise grain overlay ─── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Ambient glow blobs ─── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 55%, rgba(232, 93, 4, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 20% 80%, rgba(232, 93, 4, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 25% 25% at 80% 15%, rgba(232, 93, 4, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Wrapper ─── */
+.wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(90vw, 820px);
+  text-align: center;
+}
+
+/* ─── Corner accents ─── */
+.card {
+  position: relative;
+  padding: 64px 72px 56px;
+  border: 1px solid rgba(232, 93, 4, 0.18);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 107, 26, 0.03) 0%,
+    rgba(8, 8, 8, 0.6) 50%,
+    rgba(232, 93, 4, 0.02) 100%
+  );
+  backdrop-filter: blur(2px);
+}
+
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: var(--orange);
+  border-style: solid;
+}
+.card::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.card::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Inner corner accents via a sibling approach */
+.card-inner::before,
+.card-inner::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: var(--orange);
+  border-style: solid;
+}
+.card-inner::before {
+  top: -1px;
+  right: -1px;
+  border-width: 2px 2px 0 0;
+}
+.card-inner::after {
+  bottom: -1px;
+  left: -1px;
+  border-width: 0 0 2px 2px;
+}
+
+/* ─── Top label ─── */
+.eyebrow {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(11px, 1.1vw, 13px);
+  letter-spacing: 0.4em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0.85;
+}
+
+/* ─── Name ─── */
+.name {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(80px, 9vw, 80px);
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  color: var(--orange);
+  text-transform: capitalize;
+  position: relative;
+  /* Subtle orange text-shadow for depth */
+  text-shadow:
+    0 0 80px rgba(232, 93, 4, 0.25),
+    0 2px 0 rgba(0,0,0,0.8);
+  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Divider ─── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px auto 28px;
+  width: 80%;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--orange-dim), transparent);
+}
+.divider-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--orange);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--orange);
+}
+
+/* ─── USN ─── */
+.usn {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300;
+  font-size: clamp(18px, 3.2vw, 38px);
+  letter-spacing: 0.45em;
+  color: var(--orange-glow);
+  text-transform: uppercase;
+  animation: fadeUp 0.9s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Bottom bar ─── */
+.bottom-bar {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.bar-tick {
+  width: 32px;
+  height: 2px;
+  background: var(--orange);
+  opacity: 0.6;
+}
+.bar-text {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.35em;
+  color: var(--orange-dim);
+  text-transform: uppercase;
+}
+
+/* ─── Animations ─── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
