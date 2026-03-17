@@ -173,7 +173,7 @@ body::after {
 
 /* ─── USN ─── */
 .usn {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-bebas), sans-serif;
   font-weight: 300;
   font-size: clamp(18px, 3.2vw, 38px);
   letter-spacing: 0.1em;
