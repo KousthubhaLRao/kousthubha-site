@@ -176,7 +176,7 @@ body::after {
   font-family: var(--font-cormorant), serif;
   font-weight: 300;
   font-size: clamp(18px, 3.2vw, 38px);
-  letter-spacing: 0.45em;
+  letter-spacing: 0.1em;
   color: var(--orange-glow);
   text-transform: uppercase;
   animation: fadeUp 0.9s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
